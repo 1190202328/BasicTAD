@@ -39,9 +39,10 @@ def prepare(cfg, checkpoint):
     # device = torch.cuda.current_device()
     # engine = MMDataParallel(
     #     engine.to(device), device_ids=[torch.cuda.current_device()])
-    
+
     # device = torch.cuda.current_device()
-    engine = MMDataParallel(engine).cuda()
+    # engine = MMDataParallel(engine).cuda()
+    engine = engine.cuda()
 
     dataset = build_dataset(cfg.data.val, dict(test_mode=True))
     dataloader = build_dataloader(dataset, 1, 1, dist=False, shuffle=False)
