@@ -13,5 +13,6 @@ do
     if [ ! -d $OUTPUT_DIR/$video_name ]; then
         mkdir $OUTPUT_DIR/$video_name
     fi
-    ffmpeg -i $INPUT_DIR/$video ${@:3:$#-3} $OUTPUT_DIR/$video_name/${!#}
+#    ffmpeg -i $INPUT_DIR/$video ${@:3:$#-3} $OUTPUT_DIR/$video_name/${!#}
+    /share/home/vilab/vilab_jiangjing/ffmpeg-5.0.1-amd64-static/ffmpeg -i $INPUT_DIR/$video ${@:3:$#-3} $OUTPUT_DIR/$video_name/${!#}
 done
