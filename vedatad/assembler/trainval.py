@@ -56,7 +56,8 @@ def trainval(cfg, distributed, logger):
             engine = MMDataParallel(
                 engine.cuda(), device_ids=[torch.cuda.current_device()])
         engines['val'] = engine
-
+    print(engine)
+    raise Exception
 
     hook_pool = HookPool(cfg.hooks, cfg.modes, logger)
 
