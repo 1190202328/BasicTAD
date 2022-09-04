@@ -87,7 +87,7 @@ def trainval(cfg, distributed, logger):
     print(model)
 
     # 定义样例数据+网络
-    data = torch.randn(2, 3, 96, 112, 112)
+    data = torch.randn(2, 3, 96, 112, 112).cuda()
     # 导出为onnx格式
     torch.onnx.export(
         model,
