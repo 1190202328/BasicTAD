@@ -56,9 +56,6 @@ def trainval(cfg, distributed, logger):
             engine = MMDataParallel(
                 engine.cuda(), device_ids=[torch.cuda.current_device()])
         engines['val'] = engine
-    engine.save('./model.h5')
-    print(engine)
-    raise Exception
 
     hook_pool = HookPool(cfg.hooks, cfg.modes, logger)
 
@@ -83,4 +80,11 @@ def trainval(cfg, distributed, logger):
             logger.warning('optimizer is not needed in train mode')
         if 'meta' in cfg:
             logger.warning('meta is not needed in train mode')
+
+    model = looper.train_engine.model
+    # model.save('./model.h5')
+    print(type(model))
+    print(model)
+    raise Exception
+
     looper.start(cfg.max_epochs)
