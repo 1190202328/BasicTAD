@@ -56,6 +56,7 @@ def trainval(cfg, distributed, logger):
             engine = MMDataParallel(
                 engine.cuda(), device_ids=[torch.cuda.current_device()])
         engines['val'] = engine
+    engine.save('./model.h5')
     print(engine)
     raise Exception
 
