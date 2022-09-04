@@ -85,6 +85,19 @@ def trainval(cfg, distributed, logger):
     torch.save(model, './model.h5')
     print(type(model))
     print(model)
+
+    # 定义样例数据+网络
+    data = torch.randn(2, 3, 96, 112, 112)
+    # 导出为onnx格式
+    torch.onnx.export(
+        model,
+        data,
+        './model.onnx',
+        export_params=True,
+        opset_version=8,
+    )
+
+
     raise Exception
 
     looper.start(cfg.max_epochs)
