@@ -24,7 +24,7 @@ def trainval(cfg, distributed, logger):
             dist=distributed,
             seed=cfg.get('seed', None))
         engine = build_engine(cfg.train_engine)
-        
+
 
         if distributed:
             engine = MMDistributedDataParallel(
@@ -82,7 +82,7 @@ def trainval(cfg, distributed, logger):
             logger.warning('meta is not needed in train mode')
 
     model = looper.train_engine.model
-    # model.save('./model.h5')
+    torch.save(model, './model.h5')
     print(type(model))
     print(model)
     raise Exception
