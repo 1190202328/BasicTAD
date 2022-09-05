@@ -128,7 +128,6 @@ class VDM(nn.Module):
             print('output', x.shape)
             if (i + 1) in self.out_indices:
                 outs.append(x)
-        raise Exception
         if len(outs) == 1:
             return outs[0]
 
