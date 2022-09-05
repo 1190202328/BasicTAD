@@ -122,9 +122,13 @@ class VDM(nn.Module):
 
         for i, layer_name in enumerate(self.td_layers):
             layer = getattr(self, layer_name)
+            print('input', x.shape)
             x = layer(x)
+            print(layer)
+            print('output', x.shape)
             if (i + 1) in self.out_indices:
                 outs.append(x)
+        raise Exception
         if len(outs) == 1:
             return outs[0]
 

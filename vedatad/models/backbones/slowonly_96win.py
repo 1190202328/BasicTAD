@@ -23,10 +23,7 @@ class SlowFast_96win(nn.Module):
 
     def forward(self, x):
         for block in self._modules['blocks']:
-            print('in:', x.shape)
             x = block(x)
-            print('out:', x.shape)
-            print(block)
         return x
 
     def train(self, mode=True):
