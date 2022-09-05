@@ -22,6 +22,8 @@ class SlowFast_96win(nn.Module):
         self._freeze_bn_affine = freeze_bn_affine
 
     def forward(self, x):
+        print(x.shape)
+        raise Exception
         for block in self._modules['blocks']:
             x = block(x)
         return x

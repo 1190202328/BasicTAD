@@ -6,8 +6,8 @@ from vedacore.parallel import MMDataParallel, MMDistributedDataParallel
 from vedatad.datasets import build_dataloader, build_dataset
 from vedatad.engines import build_engine
 
-def trainval(cfg, distributed, logger):
 
+def trainval(cfg, distributed, logger):
     for mode in cfg.modes:
         assert mode in ('train', 'val')
 
@@ -25,7 +25,6 @@ def trainval(cfg, distributed, logger):
             seed=cfg.get('seed', None))
         engine = build_engine(cfg.train_engine)
 
-
         if distributed:
             engine = MMDistributedDataParallel(
                 engine.cuda(),
@@ -37,7 +36,6 @@ def trainval(cfg, distributed, logger):
                 engine.cuda(), device_ids=[torch.cuda.current_device()])
 
         engines['train'] = engine
-
 
     if 'val' in cfg.modes:
         dataset = build_dataset(cfg.data.val, dict(test_mode=True))
@@ -80,27 +78,5 @@ def trainval(cfg, distributed, logger):
             logger.warning('optimizer is not needed in train mode')
         if 'meta' in cfg:
             logger.warning('meta is not needed in train mode')
-
-    model = looper.train_engine.model
-    torch.save(model, './model.h5')
-    print(type(model))
-    print(model)
-
-    # 定义样例数据+网络
-    data = torch.randn(2, 3, 96, 112, 112).cuda()
-    from mmcv.onnx import register_extra_symbolics
-    opset_version = 11
-    register_extra_symbolics(opset_version)
-    # 导出为onnx格式
-    torch.onnx.export(
-        model,
-        data,
-        './model.onnx',
-        export_params=True,
-        opset_version=opset_version,
-    )
-
-
-    raise Exception
 
     looper.start(cfg.max_epochs)
