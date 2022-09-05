@@ -88,13 +88,16 @@ def trainval(cfg, distributed, logger):
 
     # 定义样例数据+网络
     data = torch.randn(2, 3, 96, 112, 112).cuda()
+    from mmcv.onnx import register_extra_symbolics
+    opset_version = 11
+    register_extra_symbolics(opset_version)
     # 导出为onnx格式
     torch.onnx.export(
         model,
         data,
         './model.onnx',
         export_params=True,
-        opset_version=8,
+        opset_version=opset_version,
     )
 
 
