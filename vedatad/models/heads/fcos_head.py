@@ -220,6 +220,7 @@ class FcosHead(nn.Module):
         reg_offset_list = []
 
         for i, x in enumerate(feats):
+            print(x.shape)
             output = {}
             cls_feat = x
             reg_feat = x
@@ -235,5 +236,5 @@ class FcosHead(nn.Module):
             output['offset_reg'] = reg_offset
 
             outputs.append(output)
-
+        raise Exception
         return outputs
