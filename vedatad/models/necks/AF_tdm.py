@@ -27,16 +27,22 @@ class AF_tdm(nn.Module):
     def init_weights(self):
         pass
 
-    def forward(self, x): 
+    def forward(self, x):
+        print('input', x.shape)
         if isinstance(self.stride, int):
             x=self.srm(x)
+            print(x.shape)
             x = x.squeeze(-1).squeeze(-1)
+            print(x.shape)
         x_result=[]
         temp=x
         x_result.append(temp)
         for i in range(self.num_layers-1):
+            print(f'{i} input', temp.shape)
             temp=self.pool[i](temp)
+            print(f'{i} output', temp.shape)
             x_result.append(temp)
+        raise Exception
         if isinstance(self.stride, int):
             return x_result
         else:
