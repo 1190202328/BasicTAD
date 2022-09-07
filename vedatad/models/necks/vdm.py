@@ -130,8 +130,5 @@ class VDM(nn.Module):
 
         if self.out_pooling:
             for i in range(len(outs)):
-                print(f'{i} input', outs[i].shape)
                 outs[i] = self.sp(outs[i])
-                print(f'{i} input', outs[i].shape)
-        raise Exception
         return tuple(outs)

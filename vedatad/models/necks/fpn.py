@@ -217,4 +217,7 @@ class FPN(nn.Module):
                         outs.append(self.fpn_convs[i](F.relu(outs[-1])))
                     else:
                         outs.append(self.fpn_convs[i](outs[-1]))
+        for i,out in enumerate(outs):
+            print(f'{i} {out.shape}')
+        raise Exception
         return tuple(outs)
