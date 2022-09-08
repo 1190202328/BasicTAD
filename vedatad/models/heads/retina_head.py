@@ -105,4 +105,7 @@ class RetinaHead(AnchorHead):
             reg_feat = reg_conv(reg_feat)
         cls_score = self.retina_cls(cls_feat)
         segment_pred = self.retina_reg(reg_feat)
+        print(cls_score.shape)
+        print(segment_pred.shape)
+        raise Exception
         return cls_score, segment_pred
