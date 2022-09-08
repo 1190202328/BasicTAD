@@ -97,6 +97,7 @@ class RetinaHead(AnchorHead):
                 segment_pred (Tensor): Box energies / deltas for a single scale
                     level, the channels number is num_anchors * 2.
         """
+        print('x', x.shape)
         cls_feat = x
         reg_feat = x
         for cls_conv in self.cls_convs:
@@ -105,7 +106,7 @@ class RetinaHead(AnchorHead):
             reg_feat = reg_conv(reg_feat)
         cls_score = self.retina_cls(cls_feat)
         segment_pred = self.retina_reg(reg_feat)
-        print(cls_score.shape)
-        print(segment_pred.shape)
+        print('cls', cls_score.shape)
+        print('reg', segment_pred.shape)
         raise Exception
         return cls_score, segment_pred
