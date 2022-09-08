@@ -39,7 +39,8 @@ class SegmentAnchorMeshGrid(BaseMeshGrid):
                                                     device)
         anchor_list = [multi_level_anchors for _ in range(num_videos)]
         print(len(anchor_list))
-        print(anchor_list)
+        for i in anchor_list:
+            print(len(i))
 
         # for each video, we compute valid flags of multi level anchors
         valid_flag_list = []
@@ -48,7 +49,9 @@ class SegmentAnchorMeshGrid(BaseMeshGrid):
                                                  video_meta['pad_tsize'],
                                                  device)
             valid_flag_list.append(multi_level_flags)
-        print(valid_flag_list)
+        print(len(valid_flag_list))
+        for i in valid_flag_list:
+            print(len(i))
         raise Exception
 
         return anchor_list, valid_flag_list
